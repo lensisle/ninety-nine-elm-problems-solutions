@@ -6,8 +6,7 @@ import List
 
 dropAt : Int -> List a -> List a
 dropAt n list =
-    -- your implementation here
-    []
+    List.take (n - 1) list ++ List.drop n list
 
 
 main : Html.Html a
