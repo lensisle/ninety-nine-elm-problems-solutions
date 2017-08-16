@@ -5,33 +5,19 @@ import List
 import Debug exposing (log)
 
 
-getSieveOfEratosthenes : List Int -> List Int
-getSieveOfEratosthenes xs =
-    if List.length xs < 1 then
-        []
-    else
-        case xs of
-            y :: ys ->
-                let
-                    filtered =
-                        List.filter (\val -> val % y == 0) ys
-                in
-                    log "list" filtered ++ getSieveOfEratosthenes ys
-
-            _ ->
-                []
-
-
 isPrime : Int -> Bool
 isPrime n =
-    let
-        range =
-            List.range 2 n
+    if n < 2 then
+        False
+    else
+        let
+            range =
+                List.range 2 (n // 2)
 
-        sieve =
-            getSieveOfEratosthenes range
-    in
-        0 < (List.length <| List.filter (\val -> val == n) <| sieve)
+            filtered =
+                log "filtered" (List.filter (\val -> n % val == 0) range)
+        in
+            log "Is Prime" ((List.length filtered) == 0)
 
 
 main =
