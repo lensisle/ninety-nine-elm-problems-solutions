@@ -2,9 +2,39 @@ module Main exposing (..)
 
 import Html
 import List
-import Debug exposing (log)
 
 
+erastos : Int -> List Int -> Bool
+erastos n xs =
+    case xs of
+        [] ->
+            True
+
+        y :: ys ->
+            if n % y == 0 then
+                False
+            else
+                let
+                    filtered =
+                        List.filter (\val -> val % y /= 0) ys
+                in
+                    erastos n filtered
+
+
+isPrime : Int -> Bool
+isPrime n =
+    if n < 2 then
+        False
+    else
+        let
+            range =
+                List.range 2 (n // 2)
+        in
+            erastos n range
+
+
+
+{--
 isPrime : Int -> Bool
 isPrime n =
     if n < 2 then
@@ -18,6 +48,7 @@ isPrime n =
                 log "filtered" (List.filter (\val -> n % val == 0) range)
         in
             log "Is Prime" ((List.length filtered) == 0)
+--}
 
 
 main =
